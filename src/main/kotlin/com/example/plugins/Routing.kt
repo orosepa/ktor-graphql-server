@@ -4,7 +4,7 @@ import io.ktor.routing.*
 import io.ktor.http.*
 import io.ktor.application.*
 import io.ktor.response.*
-import io.ktor.request.*
+import java.io.File
 
 fun Application.configureRouting() {
 
@@ -13,7 +13,9 @@ fun Application.configureRouting() {
         get("/") {
             call.respondText("Hello World!")
         }
-    }
-    routing {
+        get("/download_app") {
+            val apk = File("./src/main/resources/files")
+            call.response.header("Content-Disposition", "attachment; filename=\"${apk.name}\"")
+        }
     }
 }
