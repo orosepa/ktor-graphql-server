@@ -15,7 +15,11 @@ fun Application.configureRouting() {
         }
         get("/download_app") {
             val apk = File("./src/main/resources/files")
-            call.response.header("Content-Disposition", "attachment; filename=\"${apk.name}\"")
+            if(apk.exists()) {
+                call.respondFile(apk)
+                call.response.header("Content-Disposition", "attachment; filename=\"${apk.name}\"")
+            }
+            else call.respond(HttpStatusCode.NotFound)
         }
     }
 }
