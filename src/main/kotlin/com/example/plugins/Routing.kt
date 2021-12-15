@@ -14,7 +14,7 @@ fun Application.configureRouting() {
             call.respondText("Hello World!")
         }
         get("/download_app") {
-            val apk = File("./src/main/resources/files")
+            val apk = File("./src/main/resources/files/app_library.apk")
             if(apk.exists()) {
                 call.respondFile(apk)
                 call.response.header("Content-Disposition", "attachment; filename=\"${apk.name}\"")
